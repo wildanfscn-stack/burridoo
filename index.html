@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burridoo - Vibe Different 🌯</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neon-pink': '#FF10F0',
+                        'neon-blue': '#10D7FF',
+                        'neon-green': '#39FF14',
+                        'neon-orange': '#FF6B10',
+                        'dark-bg': '#0A0A0A',
+                        'dark-card': '#1A1A1A'
+                    },
+                    fontFamily: {
+                        'space': ['Space Grotesk', 'sans-serif'],
+                        'outfit': ['Outfit', 'sans-serif']
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'bounce-slow': 'bounce 3s infinite'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 20px #FF10F0; }
+            to { box-shadow: 0 0 30px #10D7FF, 0 0 40px #10D7FF; }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .neon-text {
+            text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, #FF10F0, #10D7FF, #39FF14, #FF6B10);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(255, 16, 240, 0.3);
+        }
+        
+        .btn-neon {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(45deg, #FF10F0, #10D7FF);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-neon:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 16, 240, 0.6);
+        }
+        
+        .btn-neon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-neon:hover::before {
+            left: 100%;
+        }
+    </style>
+</head>
+<body class="font-outfit text-white overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="glass fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="text-3xl font-space font-bold gradient-text flex items-center">
+                        🌯 Burridoo
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-white/80 hover:text-white font-medium transition-colors hover:neon-text">Home</a>
+                    <a href="#about" class="text-white/80 hover:text-white font-medium transition-colors hover:neon-text">About</a>
+                    <a href="#menu" class="text-white/80 hover:text-white font-medium transition-colors hover:neon-text">Menu</a>
+                    <a href="#reviews" class="text-white/80 hover:text-white font-medium transition-colors hover:neon-text">Reviews</a>
+                    <a href="#contact" class="text-white/80 hover:text-white font-medium transition-colors hover:neon-text">Contact</a>
+                    <a href="https://wa.me/6281234567890?text=Yo%20Burridoo!%20I%20want%20to%20order%20some%20fire%20burritos!" target="_blank" rel="noopener noreferrer" class="btn-neon text-white px-6 py-2 rounded-full font-semibold">
+                        Order Now
+                    </a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white hover:text-neon-pink">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden glass-dark">
+            <div class="px-4 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 text-white/80 hover:text-white font-medium">Home</a>
+                <a href="#about" class="block px-3 py-2 text-white/80 hover:text-white font-medium">About</a>
+                <a href="#menu" class="block px-3 py-2 text-white/80 hover:text-white font-medium">Menu</a>
+                <a href="#reviews" class="block px-3 py-2 text-white/80 hover:text-white font-medium">Reviews</a>
+                <a href="#contact" class="block px-3 py-2 text-white/80 hover:text-white font-medium">Contact</a>
+                <a href="https://wa.me/6281234567890?text=Yo%20Burridoo!%20I%20want%20to%20order%20some%20fire%20burritos!" target="_blank" rel="noopener noreferrer" class="block mx-3 mt-4 btn-neon text-white px-6 py-2 rounded-full font-semibold text-center">
+                    Order Now
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-16 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-20 left-10 w-32 h-32 bg-neon-pink rounded-full blur-3xl animate-float"></div>
+            <div class="absolute top-40 right-20 w-24 h-24 bg-neon-blue rounded-full blur-2xl animate-float" style="animation-delay: 2s;"></div>
+            <div class="absolute bottom-20 left-1/3 w-40 h-40 bg-neon-green rounded-full blur-3xl animate-float" style="animation-delay: 4s;"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left animate-slide-up">
+                    <div class="text-6xl lg:text-8xl font-space font-black gradient-text mb-6 neon-text">
+                        BURRIDOO
+                    </div>
+                    <h1 class="text-2xl lg:text-4xl font-outfit font-bold text-white mb-6">
+                        Vibe Different. Taste <span class="gradient-text">FIRE</span> 🔥
+                    </h1>
+                    <p class="text-lg text-white/80 mb-8 leading-relaxed">
+                        No cap, these burritos hit different! Authentic Burritos with that Gen Z twist. 
+                        Fresh ingredients, bold flavors, and vibes that slap harder than your favorite playlist.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="https://wa.me/6281234567890?text=Yo%20Burridoo!%20I%20want%20to%20order%20some%20fire%20burritos!" target="_blank" rel="noopener noreferrer" class="btn-neon text-white font-bold px-8 py-4 rounded-full text-lg animate-glow">
+                            🌯 Order Now - It's Bussin!
+                        </a>
+                        <a href="#menu" class="glass text-white hover:text-neon-pink font-bold px-8 py-4 rounded-full text-lg transition-all hover:scale-105">
+                            Check the Menu
+                        </a>
+                    </div>
+                </div>
+                <div class="text-center relative">
+                    <div class="relative animate-float">
+                        <div class="text-9xl lg:text-[12rem] animate-bounce-slow">🌯</div>
+                        <div class="absolute inset-0 bg-gradient-to-r from-neon-pink to-neon-blue rounded-full blur-3xl opacity-30 animate-pulse"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative">
+        <div class="absolute inset-0 bg-black/20"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-6xl font-space font-bold gradient-text mb-6 neon-text">About the Vibe</h2>
+                <p class="text-xl text-white/80 max-w-3xl mx-auto">
+                    We're not just serving food, we're serving CULTURE 💯
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8">
+                    <div class="glass p-8 rounded-3xl card-hover">
+                        <h3 class="text-2xl font-space font-bold text-neon-pink mb-4">🏛️ Origin Story</h3>
+                        <p class="text-white/90 leading-relaxed">
+                            Started by the owner who said "bet, let me bring that Mexican street food energy to Indonesia." 
+                            A Burridoo was born with many challenges and struggle but we still making it for serving a culture.
+                        </p>
+                    </div>                 
+                </div>             
+                    <div class="glass p-8 rounded-3xl card-hover">
+                        <h3 class="text-2xl font-space font-bold text-neon-blue mb-4">⭐ What Make Us Different</h3>
+                        <p class="text-white/90 leading-relaxed">
+                            We're serving a Mexican Street food but that very pleasing and versetile for people in indonesia. bcs, we make the try to make the flavors fit in with indonesian type.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-20 relative">
+        <div class="absolute inset-0 bg-black/30"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-6xl font-space font-bold gradient-text mb-6 neon-text">Menu That Slaps</h2>
+                <p class="text-xl text-white/80 max-w-3xl mx-auto">
+                    Every single one of these is absolutely fire 🔥 No skips on this tracklist
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Menu Item 1 -->
+                <div class="glass rounded-3xl overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-br from-red-500 via-pink-500 to-purple-500 flex items-center justify-center relative">
+                        <div class="text-7xl animate-bounce-slow">🌯</div>
+                        <div class="absolute top-4 right-4 bg-neon-blue text-white px-3 py-1 rounded-full text-sm font-bold">FAVORITE</div>
+                        <div class="absolute bottom-4 left-4 bg-neon-green text-black px-3 py-1 rounded-full text-sm font-bold">500KCAL</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-space font-bold text-white mb-3">SUPREMACYY</h3>
+                        <p class="text-white/80 mb-4 leading-relaxed">
+                            Special seasoned beef with butter rice and our special mayo and vegetables
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-3xl font-space font-bold gradient-text">30K</span>
+                            <a href="https://wa.me/6281234567890?text=Yo!%20I%20want%20the%20Carnitas%20Supreme%20-%20that%20one%20looks%20fire!" target="_blank" rel="noopener noreferrer" class="btn-neon text-white px-4 py-2 rounded-full font-semibold text-sm">
+                                Order This
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 2 -->
+                <div class="glass rounded-3xl overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-br from-green-500 via-teal-500 to-blue-500 flex items-center justify-center relative">
+                        <div class="text-7xl animate-bounce-slow">🌯</div>
+                        <div class="absolute top-4 right-4 bg-neon-pink text-white px-3 py-1 rounded-full text-sm font-bold">SPICY</div>
+                         <div class="absolute bottom-4 left-4 bg-neon-blue text-white px-3 py-1 rounded-full text-sm font-bold">570KCAL</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-space font-bold text-white mb-3">CURRYAHH</h3>
+                        <p class="text-white/80 mb-4 leading-relaxed">
+                            Deep marination grilled Chicken with curry sauce and brown rice and vegetables.
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-3xl font-space font-bold gradient-text">30K</span>
+                            <a href="https://wa.me/6281234567890?text=Yo!%20I%20want%20the%20Chicken%20Chimichurri%20-%20heard%20it%27s%20unmatched!" target="_blank" rel="noopener noreferrer" class="btn-neon text-white px-4 py-2 rounded-full font-semibold text-sm">
+                                Order This
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menu Item 3 -->
+                <div class="glass rounded-3xl overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 flex items-center justify-center relative">
+                        <div class="text-7xl animate-bounce-slow">🌯</div>
+                        <div class="absolute top-4 right-4 bg-neon-green text-white px-3 py-1 rounded-full text-sm font-bold">VEGGIES</div>
+                         <div class="absolute bottom-4 left-4 bg-neon-pink text-white px-3 py-1 rounded-full text-sm font-bold">390KCAL</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-space font-bold text-white mb-3">VEGGIE MANIA</h3>
+                        <p class="text-white/80 mb-4 leading-relaxed">
+                            Vegetables and brown rice with special sauce and spicy secret marination.
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-3xl font-space font-bold gradient-text">25K</span>
+                            <a href="https://wa.me/6281234567890?text=Yo!%20I%20want%20the%20Angus%20Beast%20Mode%20-%20ready%20for%20the%20final%20boss!" target="_blank" rel="noopener noreferrer" class="btn-neon text-white px-4 py-2 rounded-full font-semibold text-sm">
+                                Order This
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-20 relative">
+        <div class="absolute inset-0 bg-black/20"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-6xl font-space font-bold gradient-text mb-6 neon-text">Real Reviews, Real Vibes</h2>
+                <p class="text-xl text-white/80 max-w-3xl mx-auto">
+                    Don't just take our word for it - the people have spoken 📢
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="glass p-8 rounded-3xl card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-neon-pink to-neon-blue rounded-full flex items-center justify-center text-white font-bold text-lg">A</div>
+                        <div class="ml-4">
+                            <h4 class="font-space font-bold text-white">@andipratama_</h4>
+                            <div class="text-neon-pink text-sm">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-white/90 italic leading-relaxed">
+                        "Yo this Carnitas Supreme is absolutely SENDING me! 😭 Like why is this so good?? 
+                        The meat is so tender it's basically falling apart and the flavors are just *chef's kiss* 
+                        No cap, this is the best burrito in Jakarta rn"
+                    </p>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="glass p-8 rounded-3xl card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-neon-green to-neon-orange rounded-full flex items-center justify-center text-white font-bold text-lg">S</div>
+                        <div class="ml-4">
+                            <h4 class="font-space font-bold text-white">@sarahwjy</h4>
+                            <div class="text-neon-green text-sm">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-white/90 italic leading-relaxed">
+                        "As someone who's usually skeptical about veggie options... the Veggie Vibes Only literally changed my life?? 
+                        The cashew cream sauce is UNREAL and the quinoa actually tastes good (shocking I know) 
+                        Plant based but make it BUSSIN 🌱✨"
+                    </p>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="glass p-8 rounded-3xl card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-neon-blue to-neon-pink rounded-full flex items-center justify-center text-white font-bold text-lg">R</div>
+                        <div class="ml-4">
+                            <h4 class="font-space font-bold text-white">@rizkyhakim</h4>
+                            <div class="text-neon-blue text-sm">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-white/90 italic leading-relaxed">
+                        "Bro the Angus Beast Mode is NOT playing around 💀 This thing is MASSIVE and every bite is pure perfection. 
+                        The 24hr marination really shows - you can taste the dedication. Worth every rupiah fr fr"
+                    </p>
+                </div>
+
+                <!-- Review 4 -->
+                <div class="glass p-8 rounded-3xl card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-neon-orange to-neon-green rounded-full flex items-center justify-center text-white font-bold text-lg">M</div>
+                        <div class="ml-4">
+                            <h4 class="font-space font-bold text-white">@mayasari.id</h4>
+                            <div class="text-neon-orange text-sm">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-white/90 italic leading-relaxed">
+                        "Breakfast Hits Different is my new morning ritual ☀️ The eggs are so fluffy I could cry and 
+                        the hash browns have that perfect crispy-to-soft ratio. This is how you start a day RIGHT"
+                    </p>
+                </div>
+
+                <!-- Review 5 -->
+                <div class="glass p-8 rounded-3xl card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-neon-pink to-neon-green rounded-full flex items-center justify-center text-white font-bold text-lg">D</div>
+                        <div class="ml-4">
+                            <h4 font-space font-bold text-white">@dimasaryo</h4>
+                            <div class="text-neon-pink text-sm">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-white/90 italic leading-relaxed">
+                        "The Chicken Chimichurri with that guac is a whole EXPERIENCE 🥑 Like I'm not even exaggerating, 
+                        this combination should be illegal. The chimichurri sauce is addictive - I need the recipe 😭"
+                    </p>
+                </div>
+
+                <!-- Review 6 -->
+                <div class="glass p-8 rounded-3xl card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-neon-blue to-neon-orange rounded-full flex items-center justify-center text-white font-bold text-lg">L</div>
+                        <div class="ml-4">
+                            <h4 class="font-space font-bold text-white">@lisaputri</h4>
+                            <div class="text-neon-blue text-sm">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-white/90 italic leading-relaxed">
+                        "Mahi Mahi Tropical literally transported me to a beach in Mexico 🏖️ The mango salsa is so fresh and 
+                        the fish is cooked to perfection. This is summer in a tortilla and I'm here for it!"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative">
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl lg:text-6xl font-space font-bold gradient-text mb-6 neon-text">Hit Us Up</h2>
+                <p class="text-xl text-white/80 max-w-3xl mx-auto">
+                    Ready to order? Slide into our DMs or pull up to the spot 📍
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="space-y-8">
+                    <div class="glass p-8 rounded-3xl card-hover">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-neon-pink to-neon-blue rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-space font-bold text-white">The Spot</h3>
+                                <p class="text-white/80">Jl. Raya Muchtar Sawangan Baru No. 64<br>Depok, 16511</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="glass p-8 rounded-3xl card-hover">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-neon-green to-neon-orange rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-space font-bold text-white">Hours</h3>
+                                <p class="text-white/80">Mon - Sun<br>10:00 AM - 10:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass p-8 rounded-3xl">
+                    <h3 class="text-2xl font-space font-bold text-white mb-6">Connect With Us</h3>
+                    <div class="space-y-4">
+                        <a href="https://wa.me/6285156256909?text=Yo%20Burridoo!%20I%20want%20to%20order%20some%20fire%20burritos!" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-4 p-4 glass rounded-xl hover:bg-white/20 transition-all card-hover">
+                            <div class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.106"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="text-white font-semibold">WhatsApp Order</div>
+                                <div class="text-white/70 text-sm">MR. Burridoo</div>
+                            </div>
+                        </a>
+                        
+                        <a href="https://instagram.com/sleepymoochi" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-4 p-4 glass rounded-xl hover:bg-white/20 transition-all card-hover">
+                            <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="text-white font-semibold">@burridoo.id</div>
+                                <div class="text-white/70 text-sm">Our Daily content that slaps</div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="mt-8 p-6 glass rounded-xl">
+                        <h4 class="text-lg font-space font-bold text-white mb-3">🚚 Delivery Zone</h4>
+                        <p class="text-white/80 text-sm leading-relaxed">
+                            We deliver to All around Depok and West Jakarta (selected areas). Delivery fee 15K for orders under minimum. 
+                            Usually takes 30-45 mins because we don't rush perfection ✨
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="glass-dark py-8 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="text-3xl font-space font-bold gradient-text mb-4">🌯 Burridoo</div>
+                <p class="text-white/60 mb-4">Vibe Different. Taste Fire.</p>
+                <div class="flex justify-center space-x-6 text-sm text-white/40">
+                    <span>&copy; 2025 Burridoo. All vibes reserved.</span>
+                    <span>•</span>
+                    <span>Made with 💜 and lots of spice</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/6281234567890?text=Yo%20Burridoo!%20I%20want%20to%20order%20some%20fire%20burritos!" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 w-16 h-16 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center shadow-2xl z-50 animate-bounce hover:animate-none transition-all hover:scale-110">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.106"/>
+        </svg>
+    </a>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                
+                // Close mobile menu if open
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Parallax effect for floating elements
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelectorAll('.animate-float');
+            const speed = 0.5;
+
+            parallax.forEach(element => {
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-slide-up');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections and cards
+        document.querySelectorAll('section, .card-hover').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Add dynamic navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(0, 0, 0, 0.8)';
+                nav.style.backdropFilter = 'blur(20px)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.1)';
+                nav.style.backdropFilter = 'blur(20px)';
+            }
+        });
+
+        // Add click effect to buttons
+        document.querySelectorAll('.btn-neon').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'989da10e26ef6034',t:'MTc1OTY3NDc1NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
